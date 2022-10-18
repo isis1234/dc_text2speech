@@ -1,1 +1,1 @@
-# dc_text2voice
+# dc_text2speech
