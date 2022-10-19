@@ -67,21 +67,17 @@ module.exports = class TTS {
     try {
       if(!this.playing[guildID]){
         this.playing[guildID] = text
-        let audioStr = await VoiceRSSClient.getSpeech({ 
-          apiKey: this.key,
-          audioFormat: "16khz_16bit_stereo",
-          audioCodec: "OGG",
-          language, text,
-        })
-        const resource = createAudioResource(`data:audio/ogg; codecs=opus;base64,${audioStr.split(",")[1]}`, { 
-          metadata: { title: text },
-          inputType: StreamType.WebmOpus
-        })
-        this.player[guildID].play(resource)
-        this.dispatcher[guildID] = this.connection[guildID].subscribe(this.player[guildID])
-        // await intr.reply(`🗣 ${text}`)
+        VoiceRSSClient.getSpeech({ apiKey: this.key, audioFormat: "16khz_16bit_stereo", audioCodec: "OGG", language, text }).then((audioStr) => {
+          const resource = createAudioResource(`data:audio/ogg; codecs=opus;base64,${audioStr.split(",")[1]}`, { 
+            metadata: { title: text },
+            inputType: StreamType.WebmOpus
+          })
+          this.player[guildID].play(resource)
+          this.dispatcher[guildID] = this.connection[guildID].subscribe(this.player[guildID])
+        });
+        await intr.reply(`🗣 ${text}`)
       }else{
-        // await intr.reply('Wait for current speech')
+        await intr.reply('Wait for current speech')
       }
     } catch(e) {
       console.log(e)
