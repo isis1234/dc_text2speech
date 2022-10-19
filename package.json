@@ -1,0 +1,27 @@
+{
+  "name": "dc_text2voice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node init.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "dc_text2voice"
+  },
+  "keywords": [
+    "discord",
+    "bot"
+  ],
+  "author": "Isis Tang",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/voice": "^0.11.0",
+    "discord.js": "^14.6.0",
+    "dotenv": "^16.0.3",
+    "tweetnacl": "^1.0.3",
+    "voice-rss-client": "^1.3.2"
+  }
+}
